@@ -74,6 +74,18 @@ body::after {
   display: flex; align-items: center; justify-content: space-between;
   padding: clamp(18px, 2.4vw, 30px) var(--pad);
   text-shadow: 0 1px 18px rgba(0,0,0,0.45);
+  border-bottom: 1px solid transparent;
+  transition: padding .45s var(--ease), background .45s var(--ease), backdrop-filter .45s var(--ease), border-color .45s var(--ease);
+}
+/* condensed, frosted bar once the page is scrolled — stops content bleeding
+   through the transparent header */
+.nav.scrolled {
+  padding-top: clamp(11px, 1.4vw, 16px); padding-bottom: clamp(11px, 1.4vw, 16px);
+  background: linear-gradient(180deg, rgba(7,7,12,0.86), rgba(7,7,12,0.52));
+  backdrop-filter: blur(16px) saturate(1.15);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  border-bottom-color: var(--line-soft);
+  text-shadow: none;
 }
 .nav__logo { display: inline-flex; align-items: center; gap: 11px; font-family: var(--serif); font-size: 1.3rem; letter-spacing: 0.34em; padding-left: 0.34em; color: var(--cloud); }
 .nav__logo svg { width: 21px; filter: drop-shadow(0 1px 8px rgba(0,0,0,0.5)); }

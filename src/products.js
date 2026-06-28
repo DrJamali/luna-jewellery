@@ -9,8 +9,8 @@ export const products = [
     name: "Celestial Bangle",
     tag: "Bangle",
     price: 8900,
-    video: "/video/products/bangle.mp4",
-    poster: "/video/products/bangle.jpg",
+    video: "video/products/bangle.mp4",
+    poster: "video/products/bangle.jpg",
     blurb: "A single unbroken arc of recycled gold, turned to catch the light like a ring around the moon.",
     story:
       "The Celestial Bangle is shaped from one continuous arc of recycled gold, polished by hand until it holds the light the way a halo rings the moon. It sits weighty and quiet on the wrist, made to be worn every day and handed down after.",
@@ -23,8 +23,8 @@ export const products = [
     name: "Celestial Moon Necklace",
     tag: "Necklace",
     price: 6490,
-    video: "/video/products/moon.mp4",
-    poster: "/video/products/moon.jpg",
+    video: "video/products/moon.mp4",
+    poster: "video/products/moon.jpg",
     blurb: "A recycled-gold crescent cradling a single hand-set star. The signature Luna piece.",
     story:
       "The piece that started Luna. A slim crescent of recycled gold cradles a single hand-set star, strung on a fine adjustable chain that falls just below the collarbone. It is the moon you carry with you, wherever the night takes you.",
@@ -37,8 +37,8 @@ export const products = [
     name: "Peacock Jhumka Earrings",
     tag: "Earrings",
     price: 4800,
-    video: "/video/products/jhumka.mp4",
-    poster: "/video/products/jhumka.jpg",
+    video: "video/products/jhumka.mp4",
+    poster: "video/products/jhumka.jpg",
     blurb: "Oxidised silver jhumkas crowned with a single peacock eye, swinging with the slightest turn.",
     story:
       "A love letter to the subcontinent. Oxidised silver jhumkas are crowned with a single enamelled peacock eye and finished with a fall of tiny bells that catch every turn of the head. Light to wear, impossible to ignore.",
@@ -51,8 +51,8 @@ export const products = [
     name: "Rose Vine Bracelet",
     tag: "Bracelet",
     price: 5900,
-    video: "/video/products/bracelet.mp4",
-    poster: "/video/products/bracelet.jpg",
+    video: "video/products/bracelet.mp4",
+    poster: "video/products/bracelet.jpg",
     blurb: "Rubies in bloom along a trailing vine of emerald leaves, wrapped close to the wrist.",
     story:
       "A garden for the wrist. Lab-grown rubies bloom along a trailing silver vine, each leaf set with a sliver of emerald green. The clasp hides inside the vine so the bracelet reads as one unbroken line of flowers.",
