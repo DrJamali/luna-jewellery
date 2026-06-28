@@ -518,7 +518,7 @@ body[data-page]:not([data-page="home"]) { background: var(--ink); }
 .pdp__actions { margin-top: 14px; }
 
 /* ---- shop grid ---- */
-.shop__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(22px, 2.6vw, 44px); max-width: 1000px; margin-inline: auto; padding-bottom: clamp(50px, 8vh, 100px); }
+.shop__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(22px, 2.6vw, 44px); max-width: 1000px; margin-inline: auto; padding-bottom: clamp(50px, 8vh, 100px); perspective: 1200px; }
 .scard { display: flex; flex-direction: column; border-radius: 18px; overflow: hidden; background: var(--ink-2); border: 1px solid var(--line-soft); transition: transform .5s var(--ease), box-shadow .5s var(--ease), border-color .5s var(--ease); }
 .scard:hover { transform: translateY(-6px); box-shadow: 0 50px 90px -50px rgba(0,0,0,0.9); border-color: var(--line); }
 .scard__media { position: relative; display: block; aspect-ratio: 4/5; overflow: hidden; }

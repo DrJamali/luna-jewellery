@@ -184,12 +184,15 @@ export function reveals(scope = document) {
 }
 
 /* ---------- cart badge ---------- */
+let _lastCartN = 0;
 function refreshCartBadge() {
   const n = cartCount();
   document.querySelectorAll("[data-cart-count]").forEach((el) => {
     el.textContent = String(n);
     el.classList.toggle("is-empty", n === 0);
+    if (n > _lastCartN && n > 0) gsap.fromTo(el, { scale: 0.3 }, { scale: 1, duration: 0.5, ease: "back.out(3.5)" });
   });
+  _lastCartN = n;
 }
 
 /* ---------- toast ---------- */
@@ -206,6 +209,54 @@ export function toast(msg) {
   toastEl._t = setTimeout(() => toastEl.classList.remove("show"), 2600);
 }
 
+/* ---------- fly-to-cart: a thumbnail of the piece arcs into the cart icon ---------- */
+function flyToCart(btn) {
+  if (reduced) return;
+  const cart = document.querySelector("[data-cart-link]") || document.querySelector(".nav__cart");
+  const card = btn.closest(".scard, .gpanel, .pdp");
+  const media = card && card.querySelector(".scard__media, .gpanel__media, .pdp__media, video");
+  if (!cart || !media) return;
+  const m = media.getBoundingClientRect();
+  const c = cart.getBoundingClientRect();
+  if (!m.width || !c.width) return;
+  const size = Math.min(m.width, 150);
+  const vid = media.querySelector ? media.querySelector("video") : null;
+  const poster = (vid && vid.getAttribute("poster")) || null;
+  const fly = document.createElement("div");
+  fly.style.cssText =
+    `position:fixed;left:${m.left + m.width / 2 - size / 2}px;top:${m.top + m.height / 2 - size / 2}px;` +
+    `width:${size}px;height:${size}px;border-radius:18px;z-index:120;pointer-events:none;` +
+    `background:${poster ? `#0b0b12 url('${poster}') center/cover` : "linear-gradient(180deg,#f3deae,#e6cb8d)"};` +
+    `box-shadow:0 24px 60px -22px rgba(0,0,0,.75);will-change:transform,opacity;`;
+  document.body.appendChild(fly);
+  const tx = c.left + c.width / 2 - (m.left + m.width / 2);
+  const ty = c.top + c.height / 2 - (m.top + m.height / 2);
+  gsap.timeline({ onComplete: () => fly.remove() })
+    .to(fly, { duration: 0.5, x: tx * 0.45, y: ty - 60, scale: 0.7, ease: "power2.out" })
+    .to(fly, { duration: 0.45, x: tx, y: ty, scale: 0.1, opacity: 0.3, rotation: 18, ease: "power2.in" })
+    .fromTo(cart, { scale: 1 }, { scale: 1.22, duration: 0.18, ease: "back.out(4)", yoyo: true, repeat: 1 }, "-=0.12");
+}
+
+/* ---------- pointer-driven 3D tilt for product cards ---------- */
+export function cardTilt(scope = document) {
+  if (reduced || !window.matchMedia("(hover:hover) and (pointer:fine)").matches) return;
+  scope.querySelectorAll(".scard").forEach((card) => {
+    if (card.dataset.tilt) return;
+    card.dataset.tilt = "1";
+    const ry = gsap.quickTo(card, "rotationY", { duration: 0.5, ease: "power3.out" });
+    const rx = gsap.quickTo(card, "rotationX", { duration: 0.5, ease: "power3.out" });
+    const ly = gsap.quickTo(card, "y", { duration: 0.5, ease: "power3.out" });
+    gsap.set(card, { transformPerspective: 1000, transformOrigin: "center" });
+    card.addEventListener("mouseenter", () => ly(-10));
+    card.addEventListener("mousemove", (e) => {
+      const r = card.getBoundingClientRect();
+      ry(((e.clientX - r.left) / r.width - 0.5) * 10);
+      rx((0.5 - (e.clientY - r.top) / r.height) * 10);
+    });
+    card.addEventListener("mouseleave", () => { ry(0); rx(0); ly(0); });
+  });
+}
+
 /* ---------- global "add to bag" (delegated, works on every page) ---------- */
 function bindAddToCart() {
   document.addEventListener("click", (e) => {
@@ -216,6 +267,7 @@ function bindAddToCart() {
     const p = products.find((x) => x.id === id);
     if (!p) return;
     cartAdd(id, 1);
+    flyToCart(btn);
     const wasText = btn.querySelector("span");
     if (wasText && !btn.dataset.busy) {
       btn.dataset.busy = "1";

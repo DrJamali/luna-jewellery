@@ -1,7 +1,7 @@
 /* =========================================================
    LUNA — store pages (shop / cart / checkout)
    ========================================================= */
-import { initCommon, reveals, toast, playInView } from "./common.js";
+import { initCommon, reveals, toast, playInView, cardTilt } from "./common.js";
 import { products, pkr } from "./products.js";
 import { SHIPPING, PAYMENTS } from "./config.js";
 import { lines, subtotal, shipping, total, setQty, remove, count } from "./cart.js";
@@ -35,6 +35,7 @@ function buildShop() {
       </div>
     </article>`).join("");
   playInView(grid);
+  cardTilt(grid);
 }
 
 /* ============================ CART ============================ */
