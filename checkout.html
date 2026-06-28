@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout · LUNA</title>
+  <meta name="description" content="Checkout securely with Luna. Cash on delivery across Pakistan. Card payments coming soon." />
+  <meta name="theme-color" content="#07070c" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="mask-icon" href="/favicon.svg" color="#e6cb8d" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body data-page="checkout">
+
+  <div class="preloader" id="preloader">
+    <div class="preloader__inner">
+      <div class="preloader__moon"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M68 18 A38 38 0 1 0 68 82 A30 30 0 1 1 68 18 Z" /><path d="M72 24 l1.5 4 4 1.5 -4 1.5 -1.5 4 -1.5 -4 -4 -1.5 4 -1.5 Z" stroke-width="1.2" /></svg></div>
+      <div class="preloader__word">LUNA</div>
+      <div class="preloader__bar"><span id="pl-bar"></span></div>
+    </div>
+  </div>
+
+  <div id="nav-mount"></div>
+
+  <main class="page">
+    <div class="wrap">
+      <div class="page__head reveal">
+        <p class="page__crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; <a href="cart.html">Bag</a> &nbsp;/&nbsp; Checkout</p>
+        <h1>Check <span class="g">out</span></h1>
+      </div>
+
+      <!-- CHECKOUT (hidden once the order is placed) -->
+      <div class="checkout" id="checkout-root">
+        <form class="checkout__form" id="order-form" novalidate>
+          <section class="block">
+            <h2>Delivery details</h2>
+            <div class="grid2">
+              <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" type="text" autocomplete="name" required placeholder="e.g. Ayesha Khan" /></div>
+              <div class="field"><label for="f-phone">Phone / WhatsApp</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required placeholder="03xx xxxxxxx" /></div>
+            </div>
+            <div class="field"><label for="f-email">Email <span class="opt">(optional)</span></label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="your@email.com" /></div>
+            <div class="field"><label for="f-address">Address</label><input id="f-address" name="address" type="text" autocomplete="street-address" required placeholder="House / street / area" /></div>
+            <div class="grid2">
+              <div class="field"><label for="f-city">City</label><input id="f-city" name="city" type="text" autocomplete="address-level2" required placeholder="e.g. Lahore" /></div>
+              <div class="field"><label for="f-notes">Order notes <span class="opt">(optional)</span></label><input id="f-notes" name="notes" type="text" placeholder="Gift wrap, sizing, landmark…" /></div>
+            </div>
+          </section>
+
+          <section class="block">
+            <h2>Payment</h2>
+            <div class="pay" id="pay-options"></div>
+          </section>
+
+          <p class="form__err" id="order-err" hidden></p>
+          <button type="submit" class="btn btn--solid checkout__place" id="place-order" data-magnetic>
+            <span>Place order</span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <p class="checkout__fine">By placing your order you agree to our <a href="refund.html">refund policy</a> and <a href="privacy.html">privacy policy</a>.</p>
+        </form>
+
+        <aside class="summary summary--sticky" id="checkout-summary">
+          <h2>Your order</h2>
+          <div class="summary__items" id="co-items"></div>
+          <div class="summary__row"><span>Subtotal</span><span id="co-subtotal">Rs 0</span></div>
+          <div class="summary__row"><span>Delivery</span><span id="co-shipping">—</span></div>
+          <div class="summary__row summary__row--total"><span>Total</span><span id="co-total">Rs 0</span></div>
+          <a href="cart.html" class="summary__link">Edit bag</a>
+        </aside>
+      </div>
+
+      <!-- CONFIRMATION (shown after the order is placed) -->
+      <div class="confirm" id="confirm" hidden>
+        <div class="confirm__moon"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M68 18 A38 38 0 1 0 68 82 A30 30 0 1 1 68 18 Z" /></svg></div>
+        <h2>Order placed ✦</h2>
+        <p class="confirm__lead">Thank you. Your pieces are on their way to being prepared. We will confirm on WhatsApp shortly.</p>
+        <div class="confirm__card">
+          <div class="confirm__row"><span>Order number</span><strong id="cf-id">—</strong></div>
+          <div class="confirm__row"><span>Total</span><strong id="cf-total">—</strong></div>
+          <div class="confirm__row"><span>Payment</span><strong id="cf-pay">—</strong></div>
+        </div>
+        <p class="confirm__note" id="cf-note"></p>
+        <div class="confirm__actions">
+          <a href="shop.html" class="btn btn--solid" data-magnetic><span>Continue shopping</span></a>
+          <a href="index.html" class="btn btn--ghost" data-magnetic><span>Back home</span></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-mount"></div>
+
+  <script type="module" src="/src/store.js"></script>
+</body>
+</html>

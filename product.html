@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Piece · LUNA</title>
+  <meta name="description" content="A Luna piece, handcrafted in recycled gold and silver in DHA Phase 3, Lahore." />
+  <meta name="theme-color" content="#07070c" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="mask-icon" href="/favicon.svg" color="#e6cb8d" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body data-page="product">
+
+  <div class="preloader" id="preloader">
+    <div class="preloader__inner">
+      <div class="preloader__moon"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M68 18 A38 38 0 1 0 68 82 A30 30 0 1 1 68 18 Z" /><path d="M72 24 l1.5 4 4 1.5 -4 1.5 -1.5 4 -1.5 -4 -4 -1.5 4 -1.5 Z" stroke-width="1.2" /></svg></div>
+      <div class="preloader__word">LUNA</div>
+      <div class="preloader__bar"><span id="pl-bar"></span></div>
+    </div>
+  </div>
+
+  <div id="nav-mount"></div>
+
+  <main class="page">
+    <div class="wrap">
+      <p class="page__crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; <a href="index.html#collection">Collection</a> &nbsp;/&nbsp; <span id="p-crumb">Piece</span></p>
+
+      <div class="pdp">
+        <div class="pdp__media reveal">
+          <span class="pdp__badge">Handcrafted in Lahore</span>
+          <video id="p-video" muted loop playsinline preload="auto"><source src="" type="video/mp4" /></video>
+        </div>
+        <div class="pdp__info reveal">
+          <span class="pdp__tag" id="p-tag">Piece</span>
+          <h1 class="pdp__name" id="p-name">Luna piece</h1>
+          <div class="pdp__price" id="p-price">Rs —</div>
+          <p class="pdp__blurb" id="p-blurb"></p>
+          <div class="pdp__buy">
+            <div class="qty" aria-label="Quantity">
+              <button type="button" class="qty__btn" id="p-minus" aria-label="Decrease">−</button>
+              <span class="qty__n" id="p-qty">1</span>
+              <button type="button" class="qty__btn" id="p-plus" aria-label="Increase">+</button>
+            </div>
+            <button class="btn btn--solid" id="p-add" data-magnetic>
+              <span>Add to bag</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+            </button>
+          </div>
+          <div class="pdp__actions">
+            <a class="btn btn--ghost" id="p-wa" data-magnetic target="_blank" rel="noopener"><span>Enquire on WhatsApp</span></a>
+            <a class="btn btn--ghost" href="contact.html" data-magnetic><span>Reserve in store</span></a>
+          </div>
+          <div class="pdp__spec">
+            <div><h4>Materials</h4><ul id="p-materials"></ul></div>
+            <div><h4>Dimensions</h4><p id="p-dimensions"></p></div>
+            <div><h4>Care</h4><p id="p-care"></p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdp__story reveal">
+        <h2>The piece</h2>
+        <p id="p-story"></p>
+      </div>
+
+      <section class="related">
+        <div class="related__head reveal">
+          <h2>Complete the look</h2>
+          <a href="index.html#collection" class="pdp__tag">All pieces</a>
+        </div>
+        <div class="related__grid" id="p-related"></div>
+      </section>
+    </div>
+  </main>
+
+  <div id="footer-mount"></div>
+
+  <script type="module" src="/src/site.js"></script>
+</body>
+</html>

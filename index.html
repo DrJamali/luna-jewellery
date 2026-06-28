@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUNA · Celestial Fine Jewellery · Lahore</title>
+  <meta name="description" content="Luna. Celestial fine jewellery, handcrafted in Lahore. Recycled gold and silver. Visit our store in DHA Phase 3, Lahore. Wear the Moon." />
+  <meta name="theme-color" content="#07070c" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="mask-icon" href="/favicon.svg" color="#e6cb8d" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body data-page="home">
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__inner">
+      <div class="preloader__moon">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M68 18 A38 38 0 1 0 68 82 A30 30 0 1 1 68 18 Z" />
+          <path d="M72 24 l1.5 4 4 1.5 -4 1.5 -1.5 4 -1.5 -4 -4 -1.5 4 -1.5 Z" stroke-width="1.2" />
+        </svg>
+      </div>
+      <div class="preloader__word">LUNA</div>
+      <div class="preloader__bar"><span id="pl-bar"></span></div>
+    </div>
+  </div>
+
+  <div id="nav-mount"></div>
+
+  <div class="topbar" aria-hidden="true"><span id="progress"></span></div>
+
+  <nav class="rail" id="rail" aria-label="Sections"></nav>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="chapter chapter--hero" data-rail data-label="Wear the Moon" id="home">
+      <div class="ch__media">
+        <video autoplay muted loop playsinline preload="auto" poster="/video/products/moon.jpg">
+          <source src="/video/products/moon.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="ch__scrim ch__scrim--hero"></div>
+      <div class="ch__content">
+        <p class="ch__eyebrow ch-rev"><span class="line"></span> Celestial fine jewellery · Lahore</p>
+        <h1 class="ch__title ch__title--mega" data-split>Wear<br>the Moon</h1>
+        <p class="ch__lead ch-rev">Handcrafted in recycled gold and silver, in our atelier in DHA Phase 3, Lahore. Four pieces, turning slowly in the light.</p>
+        <div class="ch__actions ch-rev">
+          <a href="#collection" class="btn btn--solid" data-magnetic><span>Explore the collection</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="contact.html" class="btn btn--ghost" data-magnetic><span>Visit the store</span></a>
+        </div>
+      </div>
+      <a href="#collection" class="ch__scroll" aria-label="To the collection"><span>Scroll</span><i></i></a>
+    </section>
+
+    <!-- Collection — horizontal gallery -->
+    <section class="gallery" data-rail data-label="The Collection" id="collection">
+      <div class="gallery__head">
+        <p class="ch__eyebrow"><span class="line"></span> The collection</p>
+        <h2>Each piece, <span class="g">in motion</span></h2>
+      </div>
+      <div class="gallery__track"></div>
+      <div class="gallery__hud">
+        <span class="gallery__count"><span id="g-now">01</span> / 0<span>4</span></span>
+        <span class="gallery__hint">Scroll &nbsp;·&nbsp; drag &nbsp;·&nbsp; swipe</span>
+      </div>
+    </section>
+
+    <!-- Atelier -->
+    <section class="chapter chapter--atelier" data-rail data-label="The Atelier" id="atelier">
+      <div class="atelier__inner">
+        <div class="ch__content atelier__text">
+          <span class="ch__tag ch-rev">The atelier</span>
+          <h2 class="ch__title" data-split>Made<br>by hand</h2>
+          <p class="ch__lead ch-rev">Every Luna piece begins as a sketch under lamplight in our DHA Phase 3 atelier and ends in your hands. We cast in recycled metal and set each stone by hand.</p>
+          <ul class="ch__stats ch-rev">
+            <li><b>14</b><small>days per piece</small></li>
+            <li><b>1</b><small>artisan, start to finish</small></li>
+            <li><b>∞</b><small>lifetime re-polish</small></li>
+          </ul>
+        </div>
+        <div class="atelier__frame ch-rev">
+          <video class="atelier__video" muted loop playsinline preload="metadata" poster="/video/products/moon.jpg">
+            <source src="/video/products/moon.mp4" type="video/mp4" />
+          </video>
+          <span class="atelier__frame-scrim" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- House -->
+    <section class="chapter chapter--house" data-rail data-label="The House" id="house">
+      <canvas class="ch__stars" id="house-stars" aria-hidden="true"></canvas>
+      <div class="ch__content ch__content--center">
+        <span class="ch__tag ch-rev">The house</span>
+        <h2 class="ch__title" data-split>A conscience,<br>set in gold</h2>
+        <ol class="house__list">
+          <li class="ch-rev"><span class="house__no">01</span><b>Ethically sourced</b><span>Recycled metals, conflict-free stones, traceable mine to moonlight.</span></li>
+          <li class="ch-rev"><span class="house__no">02</span><b>Handcrafted</b><span>Shaped, set and polished by a single artisan, never a machine line.</span></li>
+          <li class="ch-rev"><span class="house__no">03</span><b>Lifetime shine</b><span>Complimentary re-polishing and repairs, forever. Made to be inherited.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Join + footer -->
+    <section class="chapter chapter--join" data-rail data-label="First Light" id="join">
+      <div class="ch__glow" aria-hidden="true"></div>
+      <div class="ch__content ch__content--center">
+        <span class="ch__tag ch-rev">First light</span>
+        <h2 class="ch__title" data-split>First look at<br>new moons</h2>
+        <p class="ch__lead ch__lead--center ch-rev">New drops, private launches and celestial offers from Lahore. No noise, only sparkle.</p>
+        <form class="join__form ch-rev" onsubmit="return false;">
+          <input type="email" placeholder="your@email.com" aria-label="Email address" />
+          <button type="submit" data-magnetic><span>Subscribe</span></button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-mount"></div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
