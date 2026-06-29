@@ -2,7 +2,7 @@
    LUNA — store pages (shop / cart / checkout)
    ========================================================= */
 import { initCommon, reveals, toast, playInView, cardTilt } from "./common.js";
-import { products, pkr } from "./products.js";
+import { products, pkr, cover } from "./products.js";
 import { SHIPPING, PAYMENTS } from "./config.js";
 import { lines, subtotal, shipping, total, setQty, remove, count } from "./cart.js";
 import { placeOrder } from "./order.js";
@@ -18,7 +18,7 @@ function buildShop() {
   grid.innerHTML = products.map((p) => `
     <article class="scard">
       <a class="scard__media" href="product.html?id=${p.id}" aria-label="${p.name}">
-        <video muted loop playsinline preload="metadata" poster="${p.poster}"><source src="${p.video}" type="video/mp4" /></video>
+        <img src="${cover(p)}" alt="${p.name}" loading="lazy" />
         <span class="scard__scrim"></span>
         <span class="scard__tag">${p.tag}</span>
       </a>
@@ -60,7 +60,7 @@ function buildCart() {
     linesEl.innerHTML = items.map((l) => `
       <div class="cline" data-id="${l.id}">
         <a class="cline__media" href="product.html?id=${l.id}">
-          <video muted loop playsinline preload="metadata" poster="${l.poster}"><source src="${l.video}" type="video/mp4" /></video>
+          <img src="${cover(l)}" alt="${l.name}" loading="lazy" />
         </a>
         <div class="cline__info">
           <span class="cline__tag">${l.tag}</span>

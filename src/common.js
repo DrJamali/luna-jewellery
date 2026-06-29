@@ -72,7 +72,7 @@ function renderFooter() {
       <div class="footer__grid">
         <div class="footer__brand">
           <div class="footer__logo">${MOON} LUNA</div>
-          <p>Celestial fine jewellery, handcrafted in Lahore. Wear the moon, carry the night.</p>
+          <p>Pretty everyday jewellery from Lahore. Wear the moon, carry the night.</p>
         </div>
         <div class="footer__col">
           <h4>Shop</h4>
@@ -81,8 +81,8 @@ function renderFooter() {
           <a href="cart.html">Cart</a>
         </div>
         <div class="footer__col">
-          <h4>House</h4>
-          <a href="index.html#atelier">Atelier</a>
+          <h4>Luna</h4>
+          <a href="index.html#atelier">About</a>
           <a href="contact.html">Contact &amp; store</a>
           <a href="privacy.html">Privacy policy</a>
           <a href="refund.html">Refund policy</a>
@@ -214,14 +214,14 @@ function flyToCart(btn) {
   if (reduced) return;
   const cart = document.querySelector("[data-cart-link]") || document.querySelector(".nav__cart");
   const card = btn.closest(".scard, .gpanel, .pdp");
-  const media = card && card.querySelector(".scard__media, .gpanel__media, .pdp__media, video");
+  const media = card && card.querySelector(".scard__media, .gpanel__media, .pdp__media, img");
   if (!cart || !media) return;
   const m = media.getBoundingClientRect();
   const c = cart.getBoundingClientRect();
   if (!m.width || !c.width) return;
   const size = Math.min(m.width, 150);
-  const vid = media.querySelector ? media.querySelector("video") : null;
-  const poster = (vid && vid.getAttribute("poster")) || null;
+  const img = media.querySelector ? media.querySelector("img") : null;
+  const poster = (img && (img.currentSrc || img.getAttribute("src"))) || null;
   const fly = document.createElement("div");
   fly.style.cssText =
     `position:fixed;left:${m.left + m.width / 2 - size / 2}px;top:${m.top + m.height / 2 - size / 2}px;` +

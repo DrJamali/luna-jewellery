@@ -3,7 +3,7 @@
    Lenis smooth scroll · horizontal pinned gallery · vertical film sections
    ========================================================= */
 import { initCommon, magnetic, reduced, gsap, ScrollTrigger } from "./common.js";
-import { products, pkr } from "./products.js";
+import { products, pkr, cover } from "./products.js";
 
 /* split a heading into masked, rising words */
 function splitWords(el) {
@@ -106,7 +106,7 @@ function gallery() {
   track.innerHTML = products.map((p, i) => `
     <article class="gpanel" data-i="${i}">
       <a class="gpanel__media" href="product.html?id=${p.id}" aria-label="${p.name}">
-        <video muted loop playsinline preload="auto" poster="${p.poster}"><source src="${p.video}" type="video/mp4" /></video>
+        <img src="${cover(p)}" alt="${p.name}" loading="lazy" />
         <span class="gpanel__scrim"></span>
       </a>
       <div class="gpanel__info">
@@ -125,39 +125,8 @@ function gallery() {
 
   magnetic(track);
   const panels = gsap.utils.toArray(".gpanel", track);
-  const vids = panels.map((p) => p.querySelector("video"));
-  vids.forEach((v) => v && (v.muted = true));
   const gNow = document.getElementById("g-now");
   const setNow = (i) => { if (gNow) gNow.textContent = String(i + 1).padStart(2, "0"); };
-
-  /* Play ONLY the centred panel, and only while the gallery is on screen.
-     The 4 panels share a vertical position, so a generic IntersectionObserver
-     fires all of them at once (= 4 videos decoding in the hero, ~36fps). We
-     gate them by hand so exactly one 720p stream ever decodes here. */
-  let galleryVisible = false;
-  let active = 0;
-  /* keep the centred panel AND its neighbour peeking in playing — max 2 at a
-     time (≈50fps on a modest GPU) instead of all four (which tanked to 36fps) */
-  const playOnly = (i) => {
-    active = i;
-    const keep = new Set([i]);
-    if (i + 1 < vids.length) keep.add(i + 1);
-    else if (i - 1 >= 0) keep.add(i - 1);
-    vids.forEach((v, j) => {
-      if (!v) return;
-      if (keep.has(j) && galleryVisible) { if (v.paused) { const p = v.play(); p && p.catch && p.catch(() => {}); } }
-      else if (!v.paused) v.pause();
-    });
-  };
-  /* Visibility via IntersectionObserver, NOT ScrollTrigger: the gallery pins
-     (position:fixed) during the horizontal scroll, which fooled a ScrollTrigger
-     into reporting "not visible" — so only the first panel's video ever played.
-     IO reads the real rendered box and stays correct while pinned. */
-  new IntersectionObserver(([e]) => {
-    galleryVisible = e.isIntersecting;
-    if (galleryVisible) playOnly(active);
-    else vids.forEach((v) => v && !v.paused && v.pause());
-  }, { threshold: 0.01 }).observe(sec);
 
   /* prep entrance for each panel */
   panels.forEach((panel) => {
@@ -178,7 +147,7 @@ function gallery() {
     /* pinned horizontal scroll: vertical wheel drives the rail sideways */
     let cur = -1;
     const activate = (i) => {
-      if (i === cur) return; cur = i; setNow(i); playOnly(i);
+      if (i === cur) return; cur = i; setNow(i);
       panels.forEach((p, j) => p.classList.toggle("is-active", j === i));
       if (!panels[i].dataset.seen) { panels[i].dataset.seen = "1"; panels[i]._intro(); }
     };
@@ -203,7 +172,7 @@ function gallery() {
         let best = Infinity, bi = 0;
         panels.forEach((p, i) => { const pc = p.offsetLeft + p.offsetWidth / 2; const d = Math.abs(pc - c); if (d < best) { best = d; bi = i; } });
         panels.forEach((p, i) => p.classList.toggle("is-active", i === bi));
-        setNow(bi); playOnly(bi);
+        setNow(bi);
       });
     }, { passive: true });
   }

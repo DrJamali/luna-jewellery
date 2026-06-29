@@ -1,74 +1,100 @@
 /* =========================================================
    LUNA — product catalogue (single source of truth)
-   Prices in PKR (Pakistani Rupee). Order: bangle first.
+   Prices in PKR (Pakistani Rupee).
+   Media: each product has an `images` array (first = primary).
    ========================================================= */
 
 export const products = [
   {
-    id: "bangle",
-    name: "Celestial Bangle",
-    tag: "Bangle",
-    price: 8900,
-    video: "video/products/bangle.mp4",
-    poster: "video/products/bangle.jpg",
-    blurb: "A single unbroken arc of recycled gold, turned to catch the light like a ring around the moon.",
+    id: "flower-cuff",
+    name: "Flower Hand Cuff",
+    tag: "Cuff",
+    price: 1200,
+    images: ["images/products/flower-cuff-1.jpg"],
+    blurb: "A gold-tone cuff of open flowers that wraps softly around the wrist.",
     story:
-      "The Celestial Bangle is shaped from one continuous arc of recycled gold, polished by hand until it holds the light the way a halo rings the moon. It sits weighty and quiet on the wrist, made to be worn every day and handed down after.",
-    materials: ["18k recycled gold vermeil", "Hand-polished finish", "Hypoallergenic core"],
-    dimensions: "Inner diameter 60mm · 6mm band",
-    care: "Wipe with the enclosed cloth. Keep away from perfume and water.",
+      "An open cuff lined with blossoms in warm gold. It sits light on the wrist and slips on easily — an everyday piece with a little bit of bloom.",
+    materials: ["Gold-tone finish", "Open cuff", "Adjustable fit"],
+    dimensions: "Open cuff · fits most wrists",
+    care: "Keep dry. Wipe with a soft cloth.",
   },
   {
-    id: "moon",
-    name: "Celestial Moon Necklace",
-    tag: "Necklace",
-    price: 6490,
-    video: "video/products/moon.mp4",
-    poster: "video/products/moon.jpg",
-    blurb: "A recycled-gold crescent cradling a single hand-set star. The signature Luna piece.",
+    id: "snake-cuff",
+    name: "Snake Hand Cuff",
+    tag: "Cuff",
+    price: 860,
+    images: ["images/products/snake-cuff-1.jpg", "images/products/snake-cuff-2.jpg"],
+    blurb: "A sleek serpent cuff with a stone-set head and green eyes.",
     story:
-      "The piece that started Luna. A slim crescent of recycled gold cradles a single hand-set star, strung on a fine adjustable chain that falls just below the collarbone. It is the moon you carry with you, wherever the night takes you.",
-    materials: ["18k recycled gold", "Hand-set cubic zirconia star", "Adjustable 16–18in chain"],
-    dimensions: "Crescent 18mm · chain 16–18in adjustable",
-    care: "Store flat in the pouch provided. Avoid contact with water and lotion.",
+      "A serpent curving around the wrist, its head dotted with tiny clear stones and finished with two green eyes. An open cuff that adjusts to fit.",
+    materials: ["Gold-tone finish", "Clear stone pavé", "Green stone eyes"],
+    dimensions: "Open cuff · adjustable",
+    care: "Keep dry. Avoid perfume and lotion.",
   },
   {
-    id: "jhumka",
-    name: "Peacock Jhumka Earrings",
-    tag: "Earrings",
-    price: 4800,
-    video: "video/products/jhumka.mp4",
-    poster: "video/products/jhumka.jpg",
-    blurb: "Oxidised silver jhumkas crowned with a single peacock eye, swinging with the slightest turn.",
+    id: "moon-pendant",
+    name: "Moon Pendant",
+    tag: "Pendant",
+    price: 650,
+    images: ["images/products/moon-pendant-1.jpg", "images/products/moon-pendant-2.jpg"],
+    blurb: "A gold crescent moon with a single star, on a fine chain.",
     story:
-      "A love letter to the subcontinent. Oxidised silver jhumkas are crowned with a single enamelled peacock eye and finished with a fall of tiny bells that catch every turn of the head. Light to wear, impossible to ignore.",
-    materials: ["Oxidised 925 sterling silver", "Hand-enamelled peacock motif", "Secure push backs"],
-    dimensions: "Drop 42mm · bell width 22mm",
-    care: "Oxidised silver deepens with age. Polish gently only to brighten.",
+      "A small gold crescent cradling a single star, on a fine chain that sits just below the collarbone. The piece that started Luna.",
+    materials: ["Gold-tone finish", "Star-set crystal", "Adjustable chain"],
+    dimensions: "Crescent ~18mm · chain 16–18in adjustable",
+    care: "Store dry. Keep away from water.",
   },
   {
-    id: "bracelet",
+    id: "rose-vine",
     name: "Rose Vine Bracelet",
     tag: "Bracelet",
-    price: 5900,
-    video: "video/products/bracelet.mp4",
-    poster: "video/products/bracelet.jpg",
-    blurb: "Rubies in bloom along a trailing vine of emerald leaves, wrapped close to the wrist.",
+    price: 959,
+    images: ["images/products/rose-vine-1.jpg", "images/products/rose-vine-2.jpg"],
+    blurb: "A silver-tone vine of red blooms and green leaves for the wrist.",
     story:
-      "A garden for the wrist. Lab-grown rubies bloom along a trailing silver vine, each leaf set with a sliver of emerald green. The clasp hides inside the vine so the bracelet reads as one unbroken line of flowers.",
-    materials: ["Rhodium-plated 925 silver", "Lab-grown ruby & emerald", "Hidden box clasp"],
-    dimensions: "Length 18cm · 5mm vine",
-    care: "Keep dry. Remove before sleeping or bathing.",
+      "Red stones bloom along a slim silver vine, with green leaves set between them. A neat clasp keeps it sitting as one clean line.",
+    materials: ["Silver-tone finish", "Red & green stones", "Box clasp"],
+    dimensions: "Length ~18cm",
+    care: "Keep dry. Store flat.",
+  },
+  {
+    id: "peacock-jhumka",
+    name: "Peacock Jhumka",
+    tag: "Earrings",
+    price: 660,
+    images: ["images/products/peacock-jhumka-1.jpg", "images/products/peacock-jhumka-2.jpg"],
+    blurb: "Oxidised jhumka earrings with a peacock-eye top and bell drops.",
+    story:
+      "A peacock-eye top sits above a classic jhumka dome, edged with a row of little bells that move when you do. Light to wear, easy to love.",
+    materials: ["Oxidised silver-tone finish", "Peacock-feather motif", "Bell drops"],
+    dimensions: "Drop ~42mm",
+    care: "Polish gently to brighten.",
+  },
+  {
+    id: "butterfly-ring",
+    name: "Butterfly Ring",
+    tag: "Ring",
+    price: 720,
+    images: ["images/products/butterfly-ring-1.jpg", "images/products/butterfly-ring-2.jpg"],
+    blurb: "A silver butterfly ring with a warm amber-tone stone at the centre.",
+    story:
+      "Open wings in silver meeting at a warm amber-tone stone, on a band that adjusts to fit. Delicate, but happy to stand out.",
+    materials: ["Silver-tone finish", "Amber-tone stone", "Adjustable band"],
+    dimensions: "Adjustable band",
+    care: "Keep dry. Wipe with a soft cloth.",
   },
 ];
 
 export const byId = (id) => products.find((p) => p.id === id) || products[0];
 
+/* primary image helper */
+export const cover = (p) => (p.images && p.images[0]) || "";
+
 /* PKR formatter → "Rs 8,900" */
 export const pkr = (n) => "Rs " + Number(n).toLocaleString("en-PK");
 
 export const STORE = {
-  name: "Luna Atelier & Store",
+  name: "Luna Store",
   address: "DHA Phase 3, Lahore, Pakistan",
   hours: "Mon–Sat · 12pm – 9pm",
   phone: "+92 300 1234567",
