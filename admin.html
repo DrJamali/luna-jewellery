@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Luna · Admin</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --ink:#f7eef3; --card:#ffffff; --card-2:#f3e7ee;
+      --text:#251f24; --mut:rgba(37,31,36,.62); --mut-2:rgba(37,31,36,.45);
+      --pink:#c06a8a; --pink-deep:#a85277; --gold:#9e7b39;
+      --line:rgba(37,31,36,.12); --line-soft:rgba(37,31,36,.07);
+      --ok:#2f8f5b; --warn:#b06a1f; --bad:#b3403f;
+      --radius:14px; --shadow:0 8px 30px rgba(80,30,55,.10);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--ink);color:var(--text);
+      font-weight:400;line-height:1.5;-webkit-font-smoothing:antialiased}
+    h1,h2,h3{font-family:Marcellus,serif;font-weight:400;margin:0}
+    a{color:var(--pink)}
+    button{font-family:inherit;cursor:pointer}
+    input,textarea,select{font-family:inherit;font-size:.95rem;color:var(--text);width:100%;
+      padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;outline:none}
+    input:focus,textarea:focus,select:focus{border-color:var(--pink)}
+    textarea{resize:vertical;min-height:64px}
+    label{display:block;font-size:.78rem;font-weight:600;letter-spacing:.02em;color:var(--mut);margin:0 0 5px}
+    .btn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:#fff;
+      color:var(--text);padding:9px 16px;border-radius:999px;font-weight:600;font-size:.88rem;transition:.15s}
+    .btn:hover{border-color:var(--pink);color:var(--pink)}
+    .btn--solid{background:var(--pink);border-color:var(--pink);color:#fff}
+    .btn--solid:hover{background:#a85277;border-color:#a85277;color:#fff}
+    .btn--danger{color:var(--bad);border-color:rgba(179,64,63,.3)}
+    .btn--danger:hover{background:var(--bad);border-color:var(--bad);color:#fff}
+    .btn--sm{padding:6px 12px;font-size:.8rem}
+    .muted{color:var(--mut)}
+
+    /* ---- login ---- */
+    .login{min-height:100vh;display:grid;place-items:center;padding:24px}
+    .login__card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+      box-shadow:var(--shadow);padding:34px 30px;width:min(380px,100%);text-align:center}
+    .login__moon{width:46px;height:46px;margin:0 auto 14px;color:var(--gold)}
+    .login__moon svg{width:100%;height:100%}
+    .login h1{font-size:1.6rem;margin-bottom:4px}
+    .login p{color:var(--mut);font-size:.9rem;margin:0 0 22px}
+    .login form{display:grid;gap:14px;text-align:left}
+    .err{color:var(--bad);font-size:.85rem;min-height:1em;margin:2px 0 0}
+
+    /* ---- shell ---- */
+    .shell{display:none}
+    .topbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;
+      gap:16px;padding:14px clamp(16px,4vw,40px);background:rgba(247,238,243,.86);
+      backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    .brand{display:flex;align-items:center;gap:10px;font-family:Marcellus,serif;font-size:1.2rem;letter-spacing:.14em}
+    .brand small{font-family:Manrope;font-size:.62rem;letter-spacing:.22em;color:var(--mut);text-transform:uppercase;
+      border:1px solid var(--line);padding:2px 7px;border-radius:999px}
+    .tabs{display:flex;gap:6px}
+    .tab{border:1px solid transparent;background:transparent;color:var(--mut);padding:8px 16px;border-radius:999px;font-weight:600;font-size:.9rem}
+    .tab.is-active{background:#fff;color:var(--text);border-color:var(--line);box-shadow:var(--shadow)}
+    .wrap{max-width:1080px;margin:0 auto;padding:clamp(18px,4vw,34px) clamp(16px,4vw,40px) 70px}
+    .panel{display:none}
+    .panel.is-active{display:block}
+    .panel__head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 18px}
+    .panel__head h2{font-size:1.5rem}
+
+    /* ---- product grid ---- */
+    .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+    .pcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+      display:flex;flex-direction:column;box-shadow:var(--shadow)}
+    .pcard__media{aspect-ratio:4/3;background:var(--card-2);overflow:hidden}
+    .pcard__media img{width:100%;height:100%;object-fit:cover;display:block}
+    .pcard__no{display:grid;place-items:center;height:100%;color:var(--mut-2);font-size:.8rem}
+    .pcard__body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:5px;flex:1}
+    .pcard__tag{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600}
+    .pcard__name{font-size:1.06rem}
+    .pcard__price{font-weight:700;color:var(--pink)}
+    .pcard__acts{display:flex;gap:8px;margin-top:auto;padding-top:10px}
+
+    /* ---- orders ---- */
+    .otable{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
+      border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:.9rem}
+    .otable th{text-align:left;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);
+      font-weight:700;padding:12px 14px;background:var(--card-2);border-bottom:1px solid var(--line)}
+    .otable td{padding:12px 14px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+    .otable tr:last-child td{border-bottom:none}
+    .o-id{font-weight:700;font-size:.84rem}
+    .o-when{color:var(--mut);font-size:.78rem}
+    .o-items{color:var(--mut);font-size:.82rem;max-width:260px}
+    .o-cust strong{display:block}
+    .o-cust span{display:block;color:var(--mut);font-size:.8rem}
+    .o-total{font-weight:700;white-space:nowrap}
+    .o-status{min-width:130px}
+    select.o-status[data-status="new"]{border-color:var(--pink);color:var(--pink)}
+    select.o-status[data-status="delivered"]{border-color:var(--ok);color:var(--ok)}
+    select.o-status[data-status="cancelled"]{border-color:var(--bad);color:var(--bad)}
+
+    .empty{text-align:center;color:var(--mut);padding:50px 20px;border:1px dashed var(--line);border-radius:var(--radius)}
+
+    /* ---- modal form ---- */
+    .modal{position:fixed;inset:0;z-index:20;background:rgba(40,20,35,.42);display:none;
+      align-items:flex-start;justify-content:center;padding:24px;overflow:auto}
+    .modal.is-open{display:flex}
+    .modal__card{background:var(--ink);border:1px solid var(--line);border-radius:var(--radius);
+      width:min(640px,100%);box-shadow:0 20px 60px rgba(60,20,45,.30);margin:auto}
+    .modal__head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line)}
+    .modal__head h3{font-size:1.3rem}
+    .modal__x{border:none;background:none;font-size:1.4rem;color:var(--mut);line-height:1;padding:4px 8px}
+    .form{padding:20px 22px;display:grid;gap:14px}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .thumb{position:relative;width:74px;height:74px;border-radius:9px;overflow:hidden;border:1px solid var(--line)}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .thumb button{position:absolute;top:2px;right:2px;width:20px;height:20px;border-radius:50%;border:none;
+      background:rgba(20,10,15,.7);color:#fff;font-size:.8rem;line-height:1;display:grid;place-items:center}
+    .form__foot{display:flex;justify-content:flex-end;gap:10px;padding:4px 22px 22px}
+    @media(max-width:560px){.row2{grid-template-columns:1fr}.tabs{display:none}}
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div class="login" id="login">
+    <div class="login__card">
+      <div class="login__moon"><svg viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M68 18 A38 38 0 1 0 68 82 A30 30 0 1 1 68 18 Z"/></svg></div>
+      <h1>Luna Admin</h1>
+      <p>Sign in to manage products & orders</p>
+      <form id="login-form">
+        <div>
+          <label for="pw">Password</label>
+          <input id="pw" type="password" autocomplete="current-password" required placeholder="••••••••" />
+        </div>
+        <button class="btn btn--solid" type="submit" style="justify-content:center" id="login-btn">Sign in</button>
+        <p class="err" id="login-err"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="shell" id="shell">
+    <header class="topbar">
+      <div class="brand">LUNA <small>Admin</small></div>
+      <nav class="tabs">
+        <button class="tab is-active" data-tab="products">Products</button>
+        <button class="tab" data-tab="orders">Orders</button>
+      </nav>
+      <button class="btn btn--sm" id="logout">Sign out</button>
+    </header>
+
+    <main class="wrap">
+      <!-- PRODUCTS -->
+      <section class="panel is-active" id="panel-products">
+        <div class="panel__head">
+          <h2>Products</h2>
+          <button class="btn btn--solid" id="add-product">+ Add product</button>
+        </div>
+        <div class="pgrid" id="pgrid"></div>
+      </section>
+
+      <!-- ORDERS -->
+      <section class="panel" id="panel-orders">
+        <div class="panel__head">
+          <h2>Orders</h2>
+          <button class="btn btn--sm" id="refresh-orders">Refresh</button>
+        </div>
+        <div id="orders-wrap"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- PRODUCT MODAL -->
+  <div class="modal" id="modal">
+    <div class="modal__card">
+      <div class="modal__head">
+        <h3 id="modal-title">Add product</h3>
+        <button class="modal__x" id="modal-close" aria-label="Close">×</button>
+      </div>
+      <form class="form" id="product-form">
+        <input type="hidden" id="f-id" />
+        <div class="row2">
+          <div><label for="f-name">Name</label><input id="f-name" required placeholder="e.g. Moon Pendant" /></div>
+          <div><label for="f-tag">Category / tag</label><input id="f-tag" placeholder="e.g. Pendant" /></div>
+        </div>
+        <div class="row2">
+          <div><label for="f-price">Price (PKR)</label><input id="f-price" type="number" min="0" step="1" required placeholder="650" /></div>
+          <div><label for="f-dimensions">Dimensions</label><input id="f-dimensions" placeholder="e.g. Chain 16–18in" /></div>
+        </div>
+        <div><label for="f-blurb">Short blurb</label><textarea id="f-blurb" placeholder="One-line description shown on cards"></textarea></div>
+        <div><label for="f-story">Story</label><textarea id="f-story" placeholder="Longer description on the product page"></textarea></div>
+        <div class="row2">
+          <div><label for="f-materials">Materials (one per line)</label><textarea id="f-materials" placeholder="Gold-tone finish&#10;Adjustable chain"></textarea></div>
+          <div><label for="f-care">Care</label><textarea id="f-care" placeholder="Keep dry. Wipe with a soft cloth."></textarea></div>
+        </div>
+        <div>
+          <label for="f-images">Photos (first is the cover)</label>
+          <input id="f-images" type="file" accept="image/*" multiple />
+          <div class="thumbs" id="thumbs"></div>
+        </div>
+        <p class="err" id="form-err"></p>
+        <div class="form__foot">
+          <button type="button" class="btn" id="cancel">Cancel</button>
+          <button type="submit" class="btn btn--solid" id="save">Save product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="/src/admin.js"></script>
+</body>
+</html>

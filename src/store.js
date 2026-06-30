@@ -2,7 +2,7 @@
    LUNA — store pages (shop / cart / checkout)
    ========================================================= */
 import { initCommon, reveals, toast, playInView, cardTilt } from "./common.js";
-import { products, pkr, cover } from "./products.js";
+import { products, pkr, cover, loadProducts } from "./products.js";
 import { SHIPPING, PAYMENTS } from "./config.js";
 import { lines, subtotal, shipping, total, setQty, remove, count } from "./cart.js";
 import { placeOrder } from "./order.js";
@@ -185,11 +185,20 @@ function buildCheckout() {
     btn.disabled = true;
     btn.querySelector("span").textContent = "Placing order…";
 
-    const order = await placeOrder({
-      name: data.name.trim(), phone: data.phone.trim(),
-      email: (data.email || "").trim(), address: data.address.trim(),
-      city: data.city.trim(), notes: (data.notes || "").trim(),
-    }, { method });
+    let order;
+    try {
+      order = await placeOrder({
+        name: data.name.trim(), phone: data.phone.trim(),
+        email: (data.email || "").trim(), address: data.address.trim(),
+        city: data.city.trim(), notes: (data.notes || "").trim(),
+      }, { method });
+    } catch (e) {
+      err.textContent = e?.message || "We couldn't place your order. Please try again.";
+      err.hidden = false;
+      btn.disabled = false;
+      btn.querySelector("span").textContent = "Place order";
+      return;
+    }
 
     // show confirmation
     root.hidden = true;
@@ -206,7 +215,8 @@ function buildCheckout() {
 }
 
 /* ============================ boot ============================ */
-initCommon().then(() => {
+initCommon().then(async () => {
+  await loadProducts();
   if (page === "shop") buildShop();
   if (page === "cart") buildCart();
   if (page === "checkout") buildCheckout();

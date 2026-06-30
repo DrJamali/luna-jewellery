@@ -2,7 +2,7 @@
    LUNA — sub-pages (product / contact / privacy / refund)
    ========================================================= */
 import { initCommon, reveals, toast } from "./common.js";
-import { products, byId, pkr, cover } from "./products.js";
+import { products, byId, pkr, cover, loadProducts } from "./products.js";
 import { add as cartAdd } from "./cart.js";
 
 const page = document.body.dataset.page;
@@ -90,7 +90,8 @@ function bindContact() {
   form.addEventListener("submit", (e) => { e.preventDefault(); form.classList.add("sent"); });
 }
 
-initCommon().then(() => {
+initCommon().then(async () => {
+  await loadProducts();
   if (page === "product") buildProduct();
   if (page === "contact") bindContact();
   reveals();

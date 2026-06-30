@@ -3,7 +3,7 @@
    Lenis smooth scroll · horizontal pinned gallery · vertical film sections
    ========================================================= */
 import { initCommon, magnetic, reduced, gsap, ScrollTrigger } from "./common.js";
-import { products, pkr, cover } from "./products.js";
+import { products, pkr, cover, loadProducts } from "./products.js";
 
 /* split a heading into masked, rising words */
 function splitWords(el) {
@@ -209,7 +209,8 @@ function stars() {
 
 /* ---------- boot ---------- */
 stars();
-initCommon().then(({ lenis }) => {
+initCommon().then(async ({ lenis }) => {
+  await loadProducts();
   verticalSections();
   gallery();
   railHud(lenis);

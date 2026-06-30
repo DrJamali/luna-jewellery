@@ -1,8 +1,10 @@
 name: Deploy to GitHub Pages
 
+# Auto-deploy on push is DISABLED. The live store now runs on the DO server
+# (Node + SQLite backend + admin dashboard). GitHub Pages is static and can't
+# run that backend, so a Pages build would have a non-working checkout/admin.
+# This workflow can still be triggered manually if a static showcase is wanted.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:

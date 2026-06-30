@@ -1,15 +1,11 @@
 /* =========================================================
-   LUNA — product catalogue
-   Products are managed in the admin dashboard and served by the
-   API (GET /api/products). `loadProducts()` fetches them at boot
-   and fills the shared `products` array in place, so every page
-   that imports `products` sees the live catalogue.
-
-   SEED below is the launch set — it's only a fallback for when the
-   API is unreachable (e.g. the static GitHub Pages showcase).
+   LUNA — first-run product seed
+   Mirrors the original catalogue so an empty DB starts with
+   the 6 launch pieces. Image paths reuse the files already
+   shipped in the site build (served from dist/images/...).
    ========================================================= */
 
-const SEED = [
+export const SEED_PRODUCTS = [
   {
     id: "flower-cuff",
     name: "Flower Hand Cuff",
@@ -89,47 +85,3 @@ const SEED = [
     care: "Keep dry. Wipe with a soft cloth.",
   },
 ];
-
-/* shared live catalogue — starts as the seed, replaced by the API at boot.
-   Mutated in place (never reassigned) so existing imports stay valid. */
-export const products = [...SEED];
-
-let loaded = null;
-/* Fetch the live catalogue from the API and fill `products` in place.
-   Falls back to the seed if the API is unreachable. Safe to call many
-   times — the network request only runs once. */
-export function loadProducts() {
-  if (loaded) return loaded;
-  loaded = fetch("/api/products", { headers: { Accept: "application/json" } })
-    .then((r) => (r.ok ? r.json() : Promise.reject(new Error("bad status"))))
-    .then((list) => {
-      if (Array.isArray(list) && list.length) {
-        products.length = 0;
-        products.push(...list);
-      }
-      return products;
-    })
-    .catch((err) => {
-      console.warn("[Luna] product API unavailable — using seed catalogue:", err);
-      return products;
-    });
-  return loaded;
-}
-
-export const byId = (id) => products.find((p) => p.id === id) || products[0];
-
-/* primary image helper */
-export const cover = (p) => (p.images && p.images[0]) || "";
-
-/* PKR formatter → "Rs 8,900" */
-export const pkr = (n) => "Rs " + Number(n).toLocaleString("en-PK");
-
-export const STORE = {
-  name: "Luna Store",
-  address: "DHA Phase 3, Lahore, Pakistan",
-  hours: "Mon–Sat · 12pm – 9pm",
-  phone: "+92 300 1234567",
-  email: "hello@luna.pk",
-  whatsapp: "+92 300 1234567",
-  maps: "https://www.google.com/maps/search/?api=1&query=DHA+Phase+3+Lahore",
-};

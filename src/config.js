@@ -3,12 +3,11 @@
    Swap these for your real values before going live.
    ========================================================= */
 
-/* Orders are POSTed here as JSON when a customer checks out.
-   DUMMY placeholder — replace with your real endpoint.
-   Easiest test: create a free URL at https://webhook.site and paste it here. */
-export const ORDER_WEBHOOK = "https://webhook.site/00000000-0000-0000-0000-000000000000";
+/* Orders are placed via the Luna API (same-origin POST /api/orders),
+   stored in the server database and managed from the admin dashboard. */
 
-/* Delivery — flat rate across Pakistan, free over a threshold (PKR). */
+/* Delivery — flat rate across Pakistan, free over a threshold (PKR).
+   Mirrored server-side in server/orders.routes.js (SHIPPING). */
 export const SHIPPING = {
   flat: 250,
   freeOver: 15000,
